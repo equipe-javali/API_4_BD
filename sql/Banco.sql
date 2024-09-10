@@ -1,20 +1,10 @@
-CREATE DATABASE Banco;
-
-USE Banco;
-
 CREATE TABLE Alerta (
     id int NOT NULL,
-    id_condicao int NOT NULL,
     id_parametro int NOT NULL,
+    condicao varchar(4) NOT NULL,
     nome varchar(100) NOT NULL,
     valor decimal(100, 10) NOT NULL,
     CONSTRAINT Alerta_pk PRIMARY KEY (id)
-);
-
-CREATE TABLE Condicao (
-    id int NOT NULL,
-    valor varchar(4) NOT NULL,
-    CONSTRAINT Condicao_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE Estacao (
@@ -73,11 +63,6 @@ CREATE TABLE Usuario (
     senha varchar(180) NOT NULL,
     CONSTRAINT Usuario_pk PRIMARY KEY (id)
 );
-
-ALTER TABLE
-    Alerta
-ADD
-    CONSTRAINT Alerta_Condicao FOREIGN KEY (id_condicao) REFERENCES Condicao (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Alerta
