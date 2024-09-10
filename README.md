@@ -74,22 +74,12 @@ Referente ao Banco de Dados da API do quarto semestre da FATEC
 </details>
 
 <details>
-<summary>Condicao</summary>
-
-| Colunas | Tipo de dados | Comprimento | Restrições | Valor padrão | Descrição |
-|:-:|:-:|:-:|:-:|:-:|:-:|
-| id | INT | Default | PK, NOT NULL | IDENTITY | Número de identificação da condição |
-| valor | VARCHAR | 4 | NOT NULL | N/A | Valor da condição |
-
-</details>
-
-<details>
 <summary>Alerta</summary>
 
 | Colunas | Tipo de dados | Comprimento | Restrições | Valor padrão | Descrição |
 |:-:|:-:|:-:|:-:|:-:|:-:|
 | id | INT | Default | PK, NOT NULL | IDENTITY | Número de identificação do alerta |
-| id_condicao | INT | Default | FK, NOT NULL | IDENTITY | Número de identificação da condição |
+| condicao | VARCHAR | 4 | NOT NULL | N/A | Condição da alerta |
 | id_parametro | INT | Default | FK, NOT NULL | IDENTITY | Número de identificação do parâmetro |
 | nome | VARCHAR  | 100 | NOT NULL | N/A | Nome do alerta |
 | valor | DECIMAL  | (100, 10) | NOT NULL | N/A | Valor do alerta |
