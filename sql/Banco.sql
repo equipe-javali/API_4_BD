@@ -35,9 +35,16 @@ CREATE TABLE Ocorrencia (
 
 CREATE TABLE Parametro (
     id serial NOT NULL,
-    id_estacao int NOT NULL,
     id_tipo int NOT NULL,
     CONSTRAINT Parametro_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE Sensor (
+    id serial NOT NULL,
+    nome varchar(100) NOT NULL,
+    id_parametro int NOT NULL,
+    id_estacao int NOT NULL,
+    CONSTRAINT Sensor_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE Tipo_Parametro (
@@ -82,12 +89,17 @@ ADD
 ALTER TABLE
     Parametro
 ADD
-    CONSTRAINT Parametro_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Parametro_Tipo_Parametro FOREIGN KEY (id_tipo) REFERENCES Tipo_Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
-    Parametro
+    Sensor
 ADD
-    CONSTRAINT Parametro_Tipo_Parametro FOREIGN KEY (id_tipo) REFERENCES Tipo_Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Sensor_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE
+    Sensor
+ADD
+    CONSTRAINT Sensor_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Tipo_Parametro
