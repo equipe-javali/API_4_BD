@@ -63,12 +63,23 @@ Referente ao Banco de Dados da API do quarto semestre da FATEC
 </details>
 
 <details>
+<summary>Sensor</summary>
+
+| Colunas | Tipo de dados | Comprimento | Restrições | Valor padrão | Descrição |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| id | SERIAL | Default | PK, NOT NULL | IDENTITY | Número de identificação do sensor |
+| nome | VARCHAR | 100 | NOT NULL | N/A | Nome do tipo do parâmetro |
+| id_estacao | INT | Default | FK, NOT NULL | IDENTITY | Número de identificação da estação |
+| id_parametro | INT | Default | FK, NOT NULL | IDENTITY | Número de identificação do parâmetro |
+
+</details>
+
+<details>
 <summary>Parametro</summary>
 
 | Colunas | Tipo de dados | Comprimento | Restrições | Valor padrão | Descrição |
 |:-:|:-:|:-:|:-:|:-:|:-:|
 | id | SERIAL | Default | PK, NOT NULL | IDENTITY | Número de identificação do parâmetro |
-| id_estacao | INT | Default | FK, NOT NULL | IDENTITY | Número de identificação da estação |
 | id_tipo | INT | Default | FK, NOT NULL | IDENTITY | Número de identificação do tipo do parâmetro |
 
 </details>
