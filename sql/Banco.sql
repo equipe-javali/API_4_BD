@@ -47,11 +47,11 @@ CREATE TABLE Sensor (
     CONSTRAINT Sensor_pk PRIMARY KEY (id)
 );
 
-CREATE TABLE Sensor_Estacao (
+CREATE TABLE SensorEstacao (
     id serial NOT NULL,
     id_estacao int NOT NULL,
     id_sensor int NOT NULL,
-    CONSTRAINT Sensor_pk PRIMARY KEY (id)
+    CONSTRAINT Sensor_Estacao_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE Tipo_Parametro (
@@ -108,14 +108,14 @@ ADD
     CONSTRAINT Parametro_Tipo_Parametro FOREIGN KEY (id_tipo) REFERENCES Tipo_Parametro (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
-    Sensor_Estacao
+    SensorEstacao
 ADD
-    CONSTRAINT Sensor_Estacao_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT SensorEstacao_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
-    Sensor_Estacao
+    SensorEstacao
 ADD
-    CONSTRAINT Sensor_Estacao_Sensor FOREIGN KEY (id_sensor) REFERENCES Sensor (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT SensorEstacao_Sensor FOREIGN KEY (id_sensor) REFERENCES Sensor (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Sensor
