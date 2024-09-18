@@ -86,7 +86,7 @@ Referente ao Banco de Dados da API do quarto semestre da FATEC
 </details>
 
 <details>
-    <summary>Sensor_Estacao</summary>
+    <summary>SensorEstacao</summary>
 
     |  Colunas   | Tipo de dados | Comprimento |  Restrições  | Valor padrão |                         Descrição                          |
     | :--------: | :-----------: | :---------: | :----------: | :----------: | :--------------------------------------------------------: |
