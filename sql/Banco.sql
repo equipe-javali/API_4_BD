@@ -1,5 +1,6 @@
 CREATE TABLE Alerta (
     id serial NOT NULL,
+    id_estacao int NOT NULL,
     id_parametro int NOT NULL,
     condicao varchar(4) NOT NULL,
     nome varchar(100) NOT NULL,
@@ -19,15 +20,15 @@ CREATE TABLE Estacao (
 
 CREATE TABLE Medicao (
     id serial NOT NULL,
+    id_parametro int NULL,
     data_hora timestamp NOT NULL,
     valor_calculado numeric(20, 5) NOT NULL,
-    id_parametro int NOT NULL,
     CONSTRAINT Medicao_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE Ocorrencia (
     id serial NOT NULL,
-    id_alerta int NOT NULL,
+    id_alerta int NULL,
     data_hora timestamp NOT NULL,
     valor numeric(20, 5) NOT NULL,
     CONSTRAINT Ocorrencia_pk PRIMARY KEY (id)
@@ -41,15 +42,21 @@ CREATE TABLE Parametro (
 
 CREATE TABLE Sensor (
     id serial NOT NULL,
-    nome varchar(100) NOT NULL,
     id_parametro int NOT NULL,
+    nome varchar(100) NOT NULL,
+    CONSTRAINT Sensor_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE Sensor_Estacao (
+    id serial NOT NULL,
     id_estacao int NOT NULL,
+    id_sensor int NOT NULL,
     CONSTRAINT Sensor_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE Tipo_Parametro (
     id serial NOT NULL,
-    id_unidade int NOT NULL,
+    id_unidade int NULL,
     nome varchar(100) NOT NULL,
     fator numeric(20, 5) NOT NULL,
     "offset" numeric(20, 5) NOT NULL,
@@ -74,34 +81,50 @@ CREATE TABLE Usuario (
 ALTER TABLE
     Alerta
 ADD
-    CONSTRAINT Alerta_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Alerta_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE
+    Alerta
+ADD
+    CONSTRAINT Alerta_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Medicao
 ADD
-    CONSTRAINT Medicao_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Medicao_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) ON DELETE
+SET
+    NULL NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Ocorrencia
 ADD
-    CONSTRAINT Ocorrencia_Alerta FOREIGN KEY (id_alerta) REFERENCES Alerta (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Ocorrencia_Alerta FOREIGN KEY (id_alerta) REFERENCES Alerta (id) ON DELETE
+SET
+    NULL NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Parametro
 ADD
-    CONSTRAINT Parametro_Tipo_Parametro FOREIGN KEY (id_tipo) REFERENCES Tipo_Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Parametro_Tipo_Parametro FOREIGN KEY (id_tipo) REFERENCES Tipo_Parametro (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE
+    Sensor_Estacao
+ADD
+    CONSTRAINT Sensor_Estacao_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE
+    Sensor_Estacao
+ADD
+    CONSTRAINT Sensor_Estacao_Sensor FOREIGN KEY (id_sensor) REFERENCES Sensor (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Sensor
 ADD
-    CONSTRAINT Sensor_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-
-ALTER TABLE
-    Sensor
-ADD
-    CONSTRAINT Sensor_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Sensor_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Tipo_Parametro
 ADD
-    CONSTRAINT Tipo_Parametro_Unidade_Medida FOREIGN KEY (id_unidade) REFERENCES Unidade_Medida (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Tipo_Parametro_Unidade_Medida FOREIGN KEY (id_unidade) REFERENCES Unidade_Medida (id) ON DELETE
+SET
+    NULL NOT DEFERRABLE INITIALLY IMMEDIATE;
