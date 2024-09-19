@@ -54,12 +54,12 @@ CREATE TABLE SensorEstacao (
     CONSTRAINT Sensor_Estacao_pk PRIMARY KEY (id)
 );
 
-CREATE TABLE Tipo_Parametro (
+CREATE  (
     id serial NOT NULL,
     id_unidade int NULL,
     nome varchar(100) NOT NULL,
     fator numeric(20, 5) NOT NULL,
-    "offset" numeric(20, 5) NOT NULL,
+    valor_offset numeric(20, 5) NOT NULL,
     nome_json varchar(180) NOT NULL,
     CONSTRAINT Tipo_Parametro_pk PRIMARY KEY (id)
 );
