@@ -67,10 +67,15 @@ Referente ao Banco de Dados da API do quarto semestre da FATEC
 <details>
     <summary>Parametro</summary>
 
-    | Colunas | Tipo de dados | Comprimento |  Restrições  | Valor padrão |                  Descrição                   |
-    | :-----: | :-----------: | :---------: | :----------: | :----------: | :------------------------------------------: |
-    |   id    |    SERIAL     |   Default   | PK, NOT NULL |   IDENTITY   |     Número de identificação do parâmetro     |
-    | id_tipo |      INT      |   Default   | FK, NOT NULL |   IDENTITY   | Número de identificação do tipo do parâmetro |
+    |   Colunas    | Tipo de dados | Comprimento |  Restrições  | Valor padrão |                  Descrição                   |
+    | :----------: | :-----------: | :---------: | :----------: | :----------: | :------------------------------------------: |
+    |      id      |    SERIAL     |   Default   | PK, NOT NULL |   IDENTITY   |     Número de identificação do parâmetro     |
+    |   id_tipo    |      INT      |   Default   | FK, NOT NULL |   IDENTITY   | Número de identificação do tipo do parâmetro |
+    |  id_unidade  |      INT      |   Default   |      FK      |   IDENTITY   | Número de identificação da unidade de medida |
+    |     nome     |    VARCHAR    |     100     |   NOT NULL   |     N/A      |          Nome do tipo do parâmetro           |
+    |    fator     |    NUMERIC    |   (20, 5)   |   NOT NULL   |     N/A      |          Fator do tipo do parâmetro          |
+    | valor_offset |    NUMERIC    |   (20, 5)   |   NOT NULL   |     N/A      |         Offset do tipo do parâmetro          |
+    |  nome_json   |    VARCHAR    |     180     |   NOT NULL   |     N/A      |      Nome do json do tipo do parâmetro       |
 
 </details>
 
@@ -93,20 +98,6 @@ Referente ao Banco de Dados da API do quarto semestre da FATEC
     |     id     |    SERIAL     |   Default   | PK, NOT NULL |   IDENTITY   | Número de identificação da relação do sensor com a estação |
     | id_sensor  |      INT      |   Default   | FK, NOT NULL |   IDENTITY   |             Número de identificação do sensor              |
     | id_estacao |      INT      |   Default   | FK, NOT NULL |   IDENTITY   |             Número de identificação da estação             |
-
-</details>
-
-<details>
-    <summary>Tipo_Parametro</summary>
-
-    |   Colunas    | Tipo de dados | Comprimento |  Restrições  | Valor padrão |                  Descrição                   |
-    | :----------: | :-----------: | :---------: | :----------: | :----------: | :------------------------------------------: |
-    |      id      |    SERIAL     |   Default   | PK, NOT NULL |   IDENTITY   | Número de identificação do tipo do parâmetro |
-    |  id_unidade  |      INT      |   Default   |      FK      |   IDENTITY   | Número de identificação da unidade de medida |
-    |     nome     |    VARCHAR    |     100     |   NOT NULL   |     N/A      |          Nome do tipo do parâmetro           |
-    |    fator     |    NUMERIC    |   (20, 5)   |   NOT NULL   |     N/A      |          Fator do tipo do parâmetro          |
-    | valor_offset |    NUMERIC    |   (20, 5)   |   NOT NULL   |     N/A      |         Offset do tipo do parâmetro          |
-    |  nome_json   |    VARCHAR    |     180     |   NOT NULL   |     N/A      |      Nome do json do tipo do parâmetro       |
 
 </details>
 
