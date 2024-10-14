@@ -20,7 +20,7 @@ CREATE TABLE Estacao (
 
 CREATE TABLE Medicao (
     id serial NOT NULL,
-    id_parametro int NOT NULL,
+    id_sensor int NULL,
     data_hora timestamp NOT NULL,
     valor_calculado numeric(20, 5) NOT NULL,
     CONSTRAINT Medicao_pk PRIMARY KEY (id)
@@ -85,7 +85,9 @@ ADD
 ALTER TABLE
     Medicao
 ADD
-    CONSTRAINT Medicao_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Medicao_Sensor FOREIGN KEY (id_sensor) REFERENCES Sensor (id) ON DELETE
+SET
+    NULL NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Ocorrencia
@@ -100,14 +102,14 @@ ADD
     CONSTRAINT SensorEstacao_Estacao FOREIGN KEY (id_estacao) REFERENCES Estacao (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
-    SensorE stacao
+    SensorEstacao
 ADD
     CONSTRAINT SensorEstacao_Sensor FOREIGN KEY (id_sensor) REFERENCES Sensor (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Sensor
 ADD
-    CONSTRAINT Sensor_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE;
+    CONSTRAINT Sensor_Parametro FOREIGN KEY (id_parametro) REFERENCES Parametro (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE
     Parametro
